@@ -50283,7 +50283,7 @@ If '${name}' is a directive input, make sure the directive is imported by the cu
   // src/app/page/event-editor/event-editor.component.html
   var event_editor_component_default = `<div class="row">
   <div class="col-6 offset-3">
-    <form #eventform="ngForm" (ngSubmit)="onUpdate(eventForm)">
+    <form #eventform="ngForm" (ngSubmit)="onUpdate(eventform)">
       <div class="form-group">
         <label for="eventName">Name</label>
         <input
@@ -50297,7 +50297,7 @@ If '${name}' is a directive input, make sure the directive is imported by the cu
           #eventName="ngModel"
         />
       </div>
-      <div [hidden]="eventForm.controls['name']?.valid" class="error-message">
+      <div [hidden]="eventform.controls['name']?.valid" class="error-message">
         Event name should be at least 8 characters long!
       </div>
       <div class="form-group">
@@ -50312,7 +50312,7 @@ If '${name}' is a directive input, make sure the directive is imported by the cu
           #eventDate="ngModel"
         />
       </div>
-      <div class="error-message" [hidden]="eventForm.controls['date']?.valid">
+      <div class="error-message" [hidden]="eventform.controls['date']?.valid">
         Event date is required!
       </div>
       <div class="form-group">
@@ -50327,7 +50327,7 @@ If '${name}' is a directive input, make sure the directive is imported by the cu
           #eventTime="ngModel"
         />
       </div>
-      <div class="error-message" [disabled]="eventForm.controls['time']?.valid">
+      <div class="error-message" [disabled]="eventform.controls['time']?.valid">
         Event time is required!
       </div>
       <div class="form-group">
@@ -50344,12 +50344,12 @@ If '${name}' is a directive input, make sure the directive is imported by the cu
       </div>
       <div
         class="error-message"
-        [disabled]="eventForm.controls['location']?.valid"
+        [disabled]="eventform.controls['location']?.valid"
       >
         Event location is required!
       </div>
       <button
-        [disabled]="eventForm.invalid"
+        [disabled]="eventform.invalid"
         type="submit"
         class="btn btn-block btn-primary"
       >
@@ -50412,8 +50412,8 @@ If '${name}' is a directive input, make sure the directive is imported by the cu
     ngOnInit() {
       this.activatedRoute.params.subscribe((params) => this.eventService.get(params["id"]).subscribe((event) => this.event = event));
     }
-    onUpdate(eventForm) {
-      this.eventService.update(eventForm.value).subscribe((event) => {
+    onUpdate(eventform) {
+      this.eventService.update(eventform.value).subscribe((event) => {
         this.router.navigate(["/"]);
       });
     }
